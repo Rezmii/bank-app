@@ -38,7 +38,6 @@ public class Blik extends Transakcja implements Info{
 
 	@Override
 	public void wyswietl() {
-		//generujKodBlik();
 		System.out.println("Numer telefonu odbiorcy: " + nrTel);
 	}
 	

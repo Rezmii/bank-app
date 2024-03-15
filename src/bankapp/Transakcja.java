@@ -26,7 +26,7 @@ public class Transakcja {
 	
 	public String toString() {
         return "Nadawca: " + nadawca + "\nOdbiorca: " + odbiorca +"\nTelefon: " + odbiorca.nrTelefonu +
-        		"\nKwota: " + kwota + "z� na numer Konta: " + odbiorca.nrKonta + " wykonana poprzez: " + typ +"\nData: " + data;
+        		"\nKwota: " + kwota + "zl na numer Konta: " + odbiorca.nrKonta + " wykonana poprzez: " + typ +"\nData: " + data;
     }
 	
 
@@ -45,23 +45,23 @@ public class Transakcja {
 	public static boolean wyslijKwote(User odbiorca, User nadawca, double kwota, Transakcja transakcja) {
 		try {
 	        if(kwota <= 0) {
-	            throw new Exception("Kwota przelewu musi by� wi�ksza ni� 0");
+	            throw new Exception("Kwota przelewu musi byc wieksza niz 0");
 	        }
 	        else if(kwota > nadawca.saldo) {
-	        throw new Exception("Nie masz wystarczaj�cych �rodk�w na koncie.");
+	        throw new Exception("Nie masz wystarczajacych srodkow na koncie.");
 	        }
 	        else if(odbiorca == null) {
 	        throw new Exception("Nie znaleziono takiego odbiorcy.");
 	        }
 	        else if(nadawca == odbiorca) {
-		        throw new Exception("Nie mo�esz wykona� transakcji do siebie samego.");
+		        throw new Exception("Nie mozesz wykonac transakcji do siebie samego.");
 		        }
 	        
 	        wybierzTyp(transakcja);
 	        if(transakcja.typ=="Blik")
 	        {
 	        	if(((Blik) transakcja).generujKodBlik()) {
-	        		 System.out.println("Transakcja przelewu BLIK zako�czona sukcesem");
+	        		 System.out.println("Transakcja przelewu BLIK zakonczona sukcesem");
 	        		 przelew(odbiorca,nadawca,kwota,transakcja);
 	        	}
 	        	else {
@@ -83,8 +83,8 @@ public class Transakcja {
 	private static void przelew(User odbiorca, User nadawca, double kwota, Transakcja transakcja) {
 		odbiorca.saldo=odbiorca.saldo+kwota;
 		nadawca.saldo=nadawca.saldo-kwota;
-		System.out.println("Wysylanie " + kwota + " z� na konto uzytkownika " + odbiorca.login +" za pomoc� transakcji typu " + transakcja.typ);
-		System.out.println("Twoj stan konta obecnie wynosi: " + nadawca.saldo + "z�");
+		System.out.println("Wysylanie " + kwota + " zl na konto uzytkownika " + odbiorca.login +" za pomoca transakcji typu " + transakcja.typ);
+		System.out.println("Twoj stan konta obecnie wynosi: " + nadawca.saldo + "zl");
 	}
 	
 
